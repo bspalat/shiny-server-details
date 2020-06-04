@@ -21,6 +21,5 @@ shiny-server-with-refresh: data
 shiny-server-wo-refresh: data
 	docker run --rm -p 80:80 \
 	-v ~/Projects/_edu/shiny-server-details/data/example-data.csv:/srv/shiny-server/example-app/data/example-data.csv \
-	-v ~/Projects/_edu/shiny-server-details/data/restart.txt:/srv/shiny-server/example-app/restart.txt \
 	shiny-server-example
 
