@@ -33,6 +33,22 @@ Try the following sequence:
 
 After this, repeat the whole procedure starting with `make shiny-server-with-refresh`.
 
+
 ## Solution
 
+### Refresh the data!
+
 To ensure that refreshing the app loads most recent data, every time you update some data files also do `touch refresh.txt` in the app root directory. This signals to Shiny Server that the R process running the app must be restarted at the next opportunity.
+
+### Shut down an R process without active connections
+
+There's a setting in the `shiny-server.conf` file called `app_idle_timeout`. This is the number of seconds an R process running a shiny app will remain live if it has no active connections.
+
+If you set it to 0, it disables this mechanism - the process is never killed. Even if it's set to 1 (second), it takes a few seconds more.
+
+To get a deeper insight into process management, do the following:
+
+* connect to docker with `docker exec -it <docker_name> /bin/bash`
+* install ps with `apt-get update && apt-get install -y procps`
+* run `top`
+* play with the Shiny apps
